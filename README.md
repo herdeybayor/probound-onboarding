@@ -19,7 +19,7 @@ Both screens feature:
 
 ## Tech Stack
 
--   **Framework**: Next.js 14 (App Router)
+-   **Framework**: Next.js 15 (App Router)
 -   **Styling**: Tailwind CSS
 -   **Form Handling**: React Hook Form + Zod validation
 -   **Components**: Custom UI components
@@ -30,7 +30,7 @@ Both screens feature:
 1. Clone the repository:
 
 ```bash
-git clone [your-repo-url]
+git clone https://github.com/herdeybayor/probound-onboarding.git
 cd probound-onboarding
 ```
 
@@ -58,8 +58,8 @@ npm run dev
 
 ## Live Demo
 
-The application is deployed at: [Your Deployment URL]
+The application is deployed at: [https://probound-herdeybayor.netlify.app/](https://probound-herdeybayor.netlify.app/)
 
 ## Repository
 
-Source code: [Your GitHub/GitLab Repository URL]
+Source code: [https://github.com/herdeybayor/probound-onboarding](https://github.com/herdeybayor/probound-onboarding)
