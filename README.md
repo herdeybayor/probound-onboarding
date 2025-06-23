@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ProBound Onboarding Task
 
-## Getting Started
+This project is my submission for the ProBound Frontend Engineer coding assignment. I've implemented two screens from the provided Figma design as responsive, production-ready UI components using Next.js.
 
-First, run the development server:
+## Implemented Screens
+
+1. **Sign In Screen**: A clean authentication form with email and password fields, password visibility toggle, and appropriate error validation.
+
+2. **Forgot Password Screen**: A password recovery form that allows users to request a password reset via email, with proper validation and user guidance.
+
+Both screens feature:
+
+-   Pixel-accurate implementation of the Figma designs
+-   Responsive layout for desktop and mobile views
+-   Form validation using React Hook Form and Zod
+-   Interactive elements (password visibility toggle)
+-   Smooth transitions and animations on the carousel
+-   Consistent design language across components
+
+## Tech Stack
+
+-   **Framework**: Next.js 14 (App Router)
+-   **Styling**: Tailwind CSS
+-   **Form Handling**: React Hook Form + Zod validation
+-   **Components**: Custom UI components
+-   **Animations**: Embla Carousel for smooth slide transitions
+
+## Setup and Run Instructions
+
+1. Clone the repository:
+
+```bash
+git clone [your-repo-url]
+cd probound-onboarding
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the sign-in page
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Assumptions and Notes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+-   The authentication forms are fully functional in terms of UI/UX but don't connect to a backend API
+-   Email validation ensures proper format before submission
+-   The carousel features testimonials that automatically rotate
+-   Mobile responsiveness is implemented for screens down to 320px width
+-   The design uses a consistent color scheme throughout the application
 
-## Learn More
+## Live Demo
 
-To learn more about Next.js, take a look at the following resources:
+The application is deployed at: [Your Deployment URL]
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Repository
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Source code: [Your GitHub/GitLab Repository URL]
