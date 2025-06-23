@@ -91,7 +91,7 @@ export function AuthCarousel() {
     }, [selectedIndex, resetDotAnimation]);
 
     return (
-        <div className="flex-1 hidden lg:flex flex-col bg-gray-100 h-[calc(100vh-100px)] rounded-[24px] overflow-hidden">
+        <div className="flex-1 hidden lg:flex flex-col bg-gray-100 h-[calc(100vh-24px)] rounded-[24px] overflow-hidden">
             <div className="embla h-full w-full relative" ref={emblaRef}>
                 <div className="embla__container h-full">
                     {SLIDES.map((slide) => (
