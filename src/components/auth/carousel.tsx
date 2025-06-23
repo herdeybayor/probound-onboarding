@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 import "./embla.css";
 
 const SLIDES = [
@@ -26,14 +27,46 @@ const SLIDES = [
     },
 ];
 
+// Define interface for the autoplay plugin
+interface AutoplayApi {
+    play: (jump?: boolean) => void;
+    stop: () => void;
+    reset: () => void;
+    isPlaying: () => boolean;
+    timeUntilNext: () => number | null;
+}
+
+const autoplayOptions = {
+    delay: 5000,
+    stopOnInteraction: false,
+    stopOnMouseEnter: true,
+};
+
 export function AuthCarousel() {
-    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay(autoplayOptions)]);
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [autoplay, setAutoplay] = useState<AutoplayApi | null>(null);
+    const dotRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+    const resetDotAnimation = useCallback(() => {
+        // Reset animation by removing and re-adding the active class
+        const activeDot = dotRefs.current[selectedIndex];
+        if (activeDot) {
+            activeDot.classList.remove("active");
+            // Force a reflow to restart the animation
+            void activeDot.offsetWidth;
+            activeDot.classList.add("active");
+        }
+    }, [selectedIndex]);
 
     const onSelect = useCallback(() => {
         if (!emblaApi) return;
-        setSelectedIndex(emblaApi.selectedScrollSnap());
-    }, [emblaApi]);
+        const newIndex = emblaApi.selectedScrollSnap();
+        if (newIndex !== selectedIndex) {
+            setSelectedIndex(newIndex);
+            // We'll reset the animation in the useEffect that listens to selectedIndex
+        }
+    }, [emblaApi, selectedIndex]);
 
     useEffect(() => {
         if (!emblaApi) return;
@@ -41,10 +74,21 @@ export function AuthCarousel() {
         emblaApi.on("select", onSelect);
         onSelect();
 
+        // Store the autoplay plugin instance
+        const pluginList = emblaApi.plugins();
+        if (pluginList.autoplay) {
+            setAutoplay(pluginList.autoplay as AutoplayApi);
+        }
+
         return () => {
             emblaApi.off("select", onSelect);
         };
     }, [emblaApi, onSelect]);
+
+    useEffect(() => {
+        // Reset dot animation whenever the selected index changes
+        resetDotAnimation();
+    }, [selectedIndex, resetDotAnimation]);
 
     return (
         <div className="flex-1 hidden lg:flex flex-col bg-gray-100 h-[calc(100vh-100px)] rounded-[24px] overflow-hidden">
@@ -67,10 +111,25 @@ export function AuthCarousel() {
                     {SLIDES.map((slide, index) => (
                         <button
                             key={slide.id}
+                            ref={(el) => {
+                                dotRefs.current[index] = el;
+                            }}
                             type="button"
                             className={`dot ${selectedIndex === index ? "active" : ""}`}
-                            onClick={() => emblaApi?.scrollTo(index)}
+                            onClick={() => {
+                                emblaApi?.scrollTo(index);
+                                if (autoplay) {
+                                    autoplay.reset();
+                                }
+                            }}
                             aria-label={`Go to slide ${index + 1}`}
+                            onMouseEnter={() => autoplay?.stop()}
+                            onMouseLeave={() => {
+                                autoplay?.play();
+                                if (selectedIndex === index) {
+                                    resetDotAnimation();
+                                }
+                            }}
                         />
                     ))}
                 </div>
