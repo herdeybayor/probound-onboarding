@@ -9,7 +9,7 @@ export interface LogoProps {
     height?: number;
 }
 
-export default function Logo({ containerClassName, className, href = "/", width = 154, height = 43 }: LogoProps) {
+export function Logo({ containerClassName, className, href = "/", width = 154, height = 43 }: LogoProps) {
     return (
         <Link href={href} className={containerClassName}>
             <Image src="/images/logo.png" alt="Probound" width={width} height={height} className={className} />
