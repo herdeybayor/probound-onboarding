@@ -51,10 +51,11 @@
     display: flex;
     justify-content: center;
     gap: 0.5rem;
+    padding: 0 3rem;
 }
 
 .dot {
-    width: 4rem;
+    flex: 1;
     height: 0.25rem;
     border-radius: 9999px;
     background-color: rgba(255, 255, 255, 0.5);
